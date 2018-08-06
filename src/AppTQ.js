@@ -12,23 +12,30 @@ import {
 	Text,
 	View,
 	Image,
+	FlatList,
 } from 'react-native';
 
 import Item from './components/TQItem';
 
+import Movies from '../movies';
+
 const styles = StyleSheet.create({
-	root: {
-		flexDirection: 'row',
+	row: {
+		paddingHorizontal: 15,
 	}
 });
 
 export default  class MyApp extends  Component {
 	render() {
 		return (
-			<View style={styles.root}>
-				<Item/>
-				<Item/>
-				<Item/>
+			<View>
+				<FlatList
+					numColumns={3}
+					columnWrapperStyle={styles.row}
+					keyExtractor={item => item.id}
+					data = {Movies.subjects}
+					renderItem={({item}) => <Item title={item.title} image={item.images.medium} stars={item.rating.stars}/>}
+				/>
 			</View>
 		);
 	}
